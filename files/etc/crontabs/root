@@ -1,7 +1,0 @@
-# Use crontab.guru to set crontab schedule spesific time
-
-# Sync time, change google.com to your bug host or ip
-0 12 * * * /sbin/sync_time.sh google.com
-
-0 * * * * /sbin/free.sh >/dev/null 2>&1
-0 */3 * * * /etc/init.d/vnstat_backup backup
