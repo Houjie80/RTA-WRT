@@ -8,7 +8,7 @@ PROFILE=""
 PACKAGES=""
 
 # Modem and UsbLAN Driver
-PACKAGES+=" kmod-usb-net-rtl8150 kmod-usb-net-rtl8152 kmod-usb-net-asix kmod-usb-net-asix-ax88179"
+PACKAGES+=" kmod-usb-net-rtl8150 kmod-usb-net-rtl8152 -kmod-usb-net-asix -kmod-usb-net-asix-ax88179 -procd-ujail usb3"
 PACKAGES+=" kmod-mii kmod-usb-net kmod-usb-wdm kmod-usb-net-qmi-wwan uqmi \
 kmod-usb-net-cdc-ether kmod-usb-serial-option kmod-usb-serial kmod-usb-serial-wwan qmi-utils \
 kmod-usb-serial-qualcomm kmod-usb-acm kmod-usb-net-cdc-ncm kmod-usb-net-cdc-mbim umbim \
@@ -24,10 +24,10 @@ else
 fi
 
 # Modem Tools
-PACKAGES+=" modeminfo luci-app-modeminfo atinout modemband luci-app-modemband luci-app-mmconfig sms-tool luci-app-sms-tool-js luci-app-lite-watchdog luci-app-3ginfo-lite picocom minicom"
+# PACKAGES+=" modeminfo luci-app-modeminfo atinout modemband luci-app-modemband luci-app-mmconfig sms-tool luci-app-sms-tool-js luci-app-lite-watchdog luci-app-3ginfo-lite picocom minicom"
 
 # Docker
-PACKAGES+=" docker docker-compose dockerd luci-app-dockerman"
+# PACKAGES+=" docker docker-compose dockerd luci-app-dockerman"
 
 # Tunnel option
 OPENCLASH=" coreutils-nohup bash dnsmasq-full curl ca-certificates ipset ip-full libcap libcap-bin ruby ruby-yaml kmod-tun kmod-inet-diag unzip kmod-nft-tproxy luci-compat luci luci-base luci-app-openclash"
@@ -46,16 +46,19 @@ PACKAGES+=" luci-app-diskman luci-app-disks-info smartmontools kmod-usb-storage 
 # PACKAGES+=" luci-app-tinyfm"
 PACKAGES+=" luci-app-tinyfilemanager"
 
-PACKAGES+=" quickstart luci-app-quickstart"
+#PACKAGES+=" quickstart luci-app-quickstart"
 
 # Bandwidth And Network Monitoring
-PACKAGES+=" internet-detector luci-app-internet-detector internet-detector-mod-modem-restart nlbwmon luci-app-nlbwmon vnstat2 vnstati2 luci-app-vnstat2 luci-app-netmonitor"
+PACKAGES+=" internet-detector luci-app-internet-detector nlbwmon luci-app-nlbwmon vnstat2 vnstati2 luci-app-vnstat2 luci-app-netmonitor"
 
 # Speedtest
 PACKAGES+=" librespeed-go python3-speedtest-cli iperf3 luci-app-netspeedtest"
 
 # Base64 Encode Decode
 PACKAGES+=" luci-app-base64"
+
+# tools mod
+ PACKAGES+=" tailscale luci-app-tailscale luci-app-droidnet luci-app-ipinfo luci-theme-initials atinout"
 
 # Argon Theme
 PACKAGES+=" luci-theme-argon luci-app-argon-config"
