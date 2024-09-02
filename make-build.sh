@@ -77,7 +77,7 @@ PACKAGES+=" perl perlbase-essential perlbase-utf8 perlbase-time perlbase-xsloade
 # Misc and some custom .ipk files
 misc=""
 if [ "${RELEASE_BRANCH%:*}" == "openwrt" ]; then
-    misc+=" luci-app-temp-status luci-app-cpu-status-mini"
+    misc+=" "
 elif [ "${RELEASE_BRANCH%:*}" == "immortalwrt" ]; then
     misc+=" "
 fi
