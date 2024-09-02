@@ -42,7 +42,7 @@ elif [ "$2" == "openclash-passwall" ]; then
 fi
 
 # NAS and Hard disk tools
-PACKAGES+=" luci-app-diskman luci-app-disks-info smartmontools kmod-usb-storage kmod-usb-storage-uas ntfs-3g"
+PACKAGES+=" luci-app-diskman smartmontools kmod-usb-storage kmod-usb-storage-uas ntfs-3g"
 # PACKAGES+=" luci-app-tinyfm"
 PACKAGES+=" luci-app-tinyfilemanager"
 
