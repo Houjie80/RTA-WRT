@@ -58,7 +58,7 @@ PACKAGES+=" librespeed-go python3-speedtest-cli iperf3 luci-app-netspeedtest"
 PACKAGES+=" luci-app-base64"
 
 # tools mod
- PACKAGES+=" luci-app-droidnet luci-app-ipinfo luci-theme-initials atinout"
+ PACKAGES+=" mihomo luci-app-neko luci-app-droidnet luci-app-ipinfo luci-theme-initials atinout"
 
 # Argon Theme
 PACKAGES+=" luci-theme-argon luci-app-argon-config"
