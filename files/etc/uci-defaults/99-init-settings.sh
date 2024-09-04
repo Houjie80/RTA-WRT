@@ -141,6 +141,7 @@ chmod +x /sbin/free.sh
 chmod +x /usr/bin/neofetch
 chmod +x /usr/bin/clock
 chmod +x /usr/bin/openclash.sh
+chmod +x /www/vnstati/vnstati.sh
 
 # configurating openclash
 if opkg list-installed | grep luci-app-openclash > /dev/null; then
