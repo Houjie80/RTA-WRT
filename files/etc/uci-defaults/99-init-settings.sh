@@ -20,11 +20,11 @@ echo "Tunnel Installed: $(opkg list-installed | grep -e luci-app-openclash -e lu
 echo "###############################################"
 
 # Set login root password
-(echo "RTAWRT"; sleep 1; echo "RTAWRT") | passwd > /dev/null
+(echo "sijitekowolu"; sleep 1; echo "sijitekowolu") | passwd > /dev/null
 
 # Set hostname and Timezone to Asia/Jakarta
 echo "Setup NTP Server and Time Zone to Asia/Jakarta"
-uci set system.@system[0].hostname='RTA-WRT'
+uci set system.@system[0].hostname='HOUJIE-WRT'
 uci set system.@system[0].timezone='WIB-7'
 uci set system.@system[0].zonename='Asia/Jakarta'
 uci -q delete system.ntp.server
@@ -128,6 +128,7 @@ sed -i 's/;DatabaseDir "\/var\/lib\/vnstat"/DatabaseDir "\/etc\/vnstat"/' /etc/v
 mkdir -p /etc/vnstat
 chmod +x /etc/init.d/vnstat_backup
 bash /etc/init.d/vnstat_backup enable
+
 
 # adjusting app catagory
 sed -i 's/services/modem/g' /usr/share/luci/menu.d/luci-app-lite-watchdog.json
