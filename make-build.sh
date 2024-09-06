@@ -8,7 +8,7 @@ PROFILE=""
 PACKAGES=""
 
 # Modem and UsbLAN Driver
-PACKAGES+=" kmod-usb-net-rtl8150 kmod-usb-net-rtl8152 kmod-usb3 -kmod-usb-net-asix -kmod-usb-net-asix-ax88179 -procd-ujail"
+PACKAGES+=" kmod-usb-net-rtl8150 kmod-usb-net-rtl8152 kmod-usb3 -kmod-usb-net-asix -kmod-usb-net-asix-ax88179 -procd-ujail kmod-usb3"
 PACKAGES+=" kmod-mii kmod-usb-net kmod-usb-wdm kmod-usb-net-qmi-wwan uqmi \
 kmod-usb-net-cdc-ether kmod-usb-serial-option kmod-usb-serial kmod-usb-serial-wwan qmi-utils \
 kmod-usb-serial-qualcomm kmod-usb-acm kmod-usb-net-cdc-ncm kmod-usb-net-cdc-mbim umbim \
@@ -58,7 +58,7 @@ PACKAGES+=" librespeed-go python3-speedtest-cli iperf3 luci-app-netspeedtest"
 PACKAGES+=" luci-app-base64"
 
 # tools mod
- PACKAGES+=" mihomo luci-app-neko luci-app-droidnet luci-app-ipinfo luci-theme-initials atinout"
+ PACKAGES+=" luci-app-tailscale mihomo luci-app-neko luci-app-droidnet luci-app-ipinfo luci-theme-initials atinout"
 
 # Argon Theme
 PACKAGES+=" luci-theme-argon luci-app-argon-config"
