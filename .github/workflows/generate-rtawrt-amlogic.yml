@@ -415,7 +415,7 @@ jobs:
           auto_kernel: ${{ inputs.auto_kernel }}
           kernel_repo: ${{ inputs.kernel_repo }}
           kernel_usage: ${{ inputs.kernel_usage }}
-          builder_name: RTA-WRT
+          builder_name: HOUJIE-WRT
 
       - name: Prepare file before upload
         if: ${{ env.PACKAGED_STATUS }} == 'success' && !cancelled()
@@ -424,8 +424,8 @@ jobs:
           cd $WORKING_DIR
           for file in compiled_images/*rootfs.tar.gz; do mv "$file" ${{ env.PACKAGED_OUTPUTPATH }}; done
           cd ${{ env.PACKAGED_OUTPUTPATH }}
-          for file in *.img.gz; do mv "$file" RTA-WRT_$(basename "$file" .img.gz)$( echo "_$TUNNEL" ).img.gz; done
-          for file in *rootfs.tar.gz; do mv "$file" RTA-WRT_$(basename "$file" .tar.gz)$( echo "_$TUNNEL" ).tar.gz; done
+          for file in *.img.gz; do mv "$file" HOUJIE-WRT_$(basename "$file" .img.gz)$( echo "_$TUNNEL" ).img.gz; done
+          for file in *rootfs.tar.gz; do mv "$file" HOUJIE-WRT_$(basename "$file" .tar.gz)$( echo "_$TUNNEL" ).tar.gz; done
           rm -r *.sha && sha256sum *.gz > sha256sums
           ls -l
           echo "RELEASE_TAG=OpenWrt-Amlogic-${{ env.DATE }}-${{ env.TARGET_NAME }}" >> $GITHUB_ENV
@@ -439,7 +439,7 @@ jobs:
           file_glob: true
           file: ${{ env.PACKAGED_OUTPUTPATH }}/*
           tag: ${{ env.RELEASE_TAG }}
-          release_name: "RTA-WRT Amlogic OpenWrt ${{ env.BRANCH }} : ${{ env.DATE }}"
+          release_name: "HOUJIE-WRT Amlogic OpenWrt ${{ env.BRANCH }} : ${{ env.DATE }}"
           overwrite: true
           prerelease: ${{ env.PRE_RELEASE }}
           body: |
@@ -450,8 +450,8 @@ jobs:
             
             - Default IP: 192.168.1.1
             - Default username: root
-            - Default password: RTAWRT
-            - Default WIFI name: RTA-WRT_2g | RTA-WRT_5g (if device supported)
+            - Default password: sijitekowolu
+            # - Default WIFI name: RTA-WRT_2g | RTA-WRT_5g (if device supported)
             
             ### Install to EMMC
             - Login to OpenWrt → System → Amlogic Service → Install OpenWrt
