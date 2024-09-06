@@ -3,5 +3,5 @@
 
 # Auto mount disk drive on startup
 # change to your drive path and uncomment below
-
+/usr/bin/inet-hg680p.sh -r
 exit 0
