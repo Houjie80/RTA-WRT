@@ -143,6 +143,8 @@ chmod +x /usr/bin/neofetch
 chmod +x /usr/bin/clock
 chmod +x /usr/bin/openclash.sh
 chmod +x /www/vnstati/vnstati.sh
+chmod +x /usr/bin/inet-hg680p.sh
+chmod +x /usr/bin/hg680p.sh
 
 # configurating openclash
 if opkg list-installed | grep luci-app-openclash > /dev/null; then
