@@ -9,7 +9,7 @@ openclash_file_down="$(curl -s ${openclash_api} | grep "browser_download_url" | 
 passwall_api="https://api.github.com/repos/xiaorouji/openwrt-passwall/releases"
 passwall_file="luci-23.05_luci-app-passwall"
 passwall_file_down="$(curl -s ${passwall_api} | grep "browser_download_url" | grep -oE "https.*${passwall_file}.*.ipk" | head -n 1)"
-passwall_ipk_packages="$(curl -s ${passwall_api} | grep "browser_download_url" | grep -oE "https.*passwall_packages_ipk_$ARCH_3.zip" | head -n 1)"
+passwall_ipk_packages="$(curl -s ${passwall_api} | grep "browser_download_url" | grep -oE "https.*passwall_packages_ipk_aarch64_generic.zip" | head -n 1)"
                        
 
 if [ "$1" == "openclash" ]; then
@@ -19,7 +19,7 @@ elif [ "$1" == "passwall" ]; then
     echo "Downloading Passwall packages ipk"
     wget "$passwall_file_down" -nv -P packages
     wget "${passwall_ipk_packages}" -nv -P packages
-    unzip -qq packages/"passwall_packages_ipk_$ARCH_3.zip" -d packages && rm packages/"passwall_packages_ipk_$ARCH_3.zip"
+    unzip -qq packages/"passwall_packages_ipk_aarch64_generic.zip" -d packages && rm packages/"passwall_packages_ipk_aarch64_generic.zip"
 elif [ "$1" == "openclash-passwall" ]; then
     echo "Installing Openclash and Passwall"
     echo "Downloading Openclash packages"
@@ -27,7 +27,7 @@ elif [ "$1" == "openclash-passwall" ]; then
     echo "Downloading Passwall packages ipk"
     wget "$passwall_file_down" -nv -P packages
     wget "${passwall_ipk_packages}" -nv -P packages
-    unzip -qq packages/"passwall_packages_ipk_$ARCH_3.zip" -d packages && rm packages/"passwall_packages_ipk_$ARCH_3.zip"
+    unzip -qq packages/"passwall_packages_ipk_$ARCH_3.zip" -d packages && rm packages/"passwall_packages_ipk_aarch64_generic.zip"
 fi 
 if [ "$?" -ne 0 ]; then
     echo "Error: Download or extraction failed."
