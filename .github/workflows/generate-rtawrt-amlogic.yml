@@ -225,7 +225,7 @@ jobs:
 
       - name: Packaging ${{ inputs.release_branch }}
         if: ${{ steps.imagebuilder.outputs.status }} == 'success' && !cancelled()
-        uses: ophub/amlogic-s9xxx-openwrt@main
+        uses: Houjie80/amlogic-s9xxx-openwrt@main
         with:
           openwrt_path: $WORKING_DIR/compiled_images/*rootfs.tar.gz
           openwrt_board: ${{ env.openwrt_board }}
