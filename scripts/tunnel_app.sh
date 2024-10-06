@@ -13,7 +13,7 @@ passwall_ipk_packages="$(curl -s ${passwall_api} | grep "browser_download_url" |
                        
 # Mihomo
 mihomo_api="https://api.github.com/repos/morytyann/OpenWrt-mihomo/releases"
-mihomo_file="mihomo_${ARCH}_3"
+mihomo_file="mihomo_aarch64_generic"
 mihomo_file_down="$(curl -s ${mihomo_api} | grep "browser_download_url" | grep -oE "https.*${mihomo_file}.*.tar.gz" | head -n 1)"
                        
 # Output download information
@@ -54,7 +54,7 @@ if [ "$?" -ne 0 ]; then
 fi
 
 # Extract Mihomo package
-tar -xzvf packages/"mihomo_${ARCH}_3.tar.gz" -C packages && rm packages/"mihomo_${ARCH}_3.tar.gz"
+tar -xzvf packages/"mihomo_aarch64_generic.tar.gz" -C packages && rm packages/"mihomo_aarch64_generic.tar.gz"
 if [ "$?" -ne 0 ]; then
     echo "Error: Failed to extract Mihomo package."
     exit 1
