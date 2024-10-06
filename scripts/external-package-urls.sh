@@ -159,6 +159,8 @@ wget --no-check-certificate -i output_url.txt -nv -P packages
     "luci-app-temp-status"
     "luci-app-ramfree"
     "quickstart"
+    "pdnsd-alt"
+    "brook"
     "luci-app-tinyfilemanager"
     "modeminfo"
     "atinout"
