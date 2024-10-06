@@ -43,7 +43,7 @@ PACKAGES+=" internet-detector luci-app-internet-detector nlbwmon luci-app-nlbwmo
 PACKAGES+=" librespeed-go python3-speedtest-cli iperf3 luci-app-netspeedtest"
 
 # Base64 Encode Decode
-PACKAGES+=" luci-app-base64"
+PACKAGES+=" luci-app-base64 luci-app-droidnet luci-app-ipinfo luci-theme-initials luci-theme-hj atinout"
 
 # Material Theme
 PACKAGES+=" luci-theme-material"
