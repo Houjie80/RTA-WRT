@@ -211,6 +211,7 @@ on:
           - all
           - openclash
           - passwall
+          - mihomo
           - openclash-passwall
           - no-tunnel
       clean:
@@ -364,8 +365,8 @@ jobs:
           bash scripts/misc.sh
           if [[ "$TUNNEL" == "all" ]]; then 
               echo "VPN Client: $TUNNEL"
-              bash scripts/tunnel_app.sh openclash-passwall
-          elif [[ "$TUNNEL" == "passwall" || "$TUNNEL" == "openclash-passwall" || "$TUNNEL" == "openclash" ]]; then
+              bash scripts/tunnel_app.sh openclash-passwall-mihomo
+          elif [[ "$TUNNEL" == "passwall" || "$TUNNEL" == "openclash-passwall" || "$TUNNEL" == "mihomo" || "$TUNNEL" == "openclash" ]]; then
               echo "VPN Client: $TUNNEL"
               bash scripts/tunnel_app.sh "$TUNNEL"
           else
