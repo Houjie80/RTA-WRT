@@ -213,6 +213,7 @@ on:
           - passwall
           - mihomo
           - openclash-passwall
+          - openclash-passwall-mihomo
           - no-tunnel
       clean:
         description: "Do 'make clean' for each run"
@@ -366,7 +367,7 @@ jobs:
           if [[ "$TUNNEL" == "all" ]]; then 
               echo "VPN Client: $TUNNEL"
               bash scripts/tunnel_app.sh openclash-passwall-mihomo
-          elif [[ "$TUNNEL" == "passwall" || "$TUNNEL" == "openclash-passwall" || "$TUNNEL" == "mihomo" || "$TUNNEL" == "openclash" ]]; then
+          elif [[ "$TUNNEL" == "passwall" || "$TUNNEL" == "openclash-passwall" || "$TUNNEL" == "openclash-passwall-mihomo" || "$TUNNEL" == "mihomo" || "$TUNNEL" == "openclash" ]]; then
               echo "VPN Client: $TUNNEL"
               bash scripts/tunnel_app.sh "$TUNNEL"
           else
