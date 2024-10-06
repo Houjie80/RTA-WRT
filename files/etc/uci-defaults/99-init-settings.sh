@@ -14,6 +14,7 @@ chmod +x /usr/sbin/openwrt-install-allwinner
 chmod +x /usr/sbin/openwrt-openvfd
 chmod +x /usr/sbin/openwrt-swap
 chmod +x /usr/sbin/openwrt-tf
+chmod +x /www/vnstati/vnstati.sh
 else
 sed -i 's/\[ -f \/etc\/banner \] && cat \/etc\/banner/#&/' /etc/profile
 sed -i 's/\[ -n "$FAILSAFE" \] && cat \/etc\/banner.failsafe/& || \/usr\/bin\/rtawrt/' /etc/profile
