@@ -8,7 +8,7 @@ PROFILE=""
 PACKAGES=""
 
 # Modem and UsbLAN Driver
-PACKAGES+=" wget kmod-usb-net-rtl8150 kmod-usb-net-rtl8152 kmod-usb-net-asix kmod-usb-net-asix-ax88179"
+PACKAGES+=" wget kmod-usb-net-rtl8150 kmod-usb-net-rtl8152 -kmod-usb-net-asix -kmod-usb-net-asix-ax88179"
 PACKAGES+=" kmod-mii kmod-usb-net kmod-usb-wdm kmod-usb-net-qmi-wwan uqmi luci-proto-qmi \
 kmod-usb-net-cdc-ether kmod-usb-serial-option kmod-usb-serial kmod-usb-serial-wwan qmi-utils \
 kmod-usb-serial-qualcomm kmod-usb-acm kmod-usb-net-cdc-ncm kmod-usb-net-cdc-mbim umbim \
@@ -19,10 +19,10 @@ kmod-phy-broadcom kmod-phylib-broadcom kmod-tg3"
 
 PACKAGES+=" lolcat coreutils-stty"
 PACKAGES+=" naiveproxy mihomo luci-app-mihomo"
-PACKAGES+=" luci-app-zerotier luci-app-cloudflared tailscale luci-app-tailscale"
+PACKAGES+=" luci-app-zerotier tailscale luci-app-tailscale"
 
 # Modem Tools
-PACKAGES+=" modeminfo luci-app-modeminfo atinout modemband luci-app-modemband luci-app-mmconfig sms-tool luci-app-sms-tool-js luci-app-lite-watchdog luci-app-3ginfo-lite picocom minicom"
+# PACKAGES+=" modeminfo luci-app-modeminfo atinout modemband luci-app-modemband luci-app-mmconfig sms-tool luci-app-sms-tool-js luci-app-lite-watchdog luci-app-3ginfo-lite picocom minicom"
 
 # Tunnel option
 OPENCLASH="coreutils-nohup bash dnsmasq-full curl ca-certificates ipset ip-full libcap libcap-bin ruby ruby-yaml kmod-tun kmod-inet-diag unzip kmod-nft-tproxy luci-compat luci luci-base luci-app-openclash"
@@ -31,13 +31,13 @@ PASSWALL="ipset ipt2socks iptables iptables-legacy iptables-mod-iprange iptables
 PACKAGES+=" $OPENCLASH $PASSWALL"
 
 # NAS and Hard disk tools
-PACKAGES+=" luci-app-diskman luci-app-hd-idle luci-app-disks-info smartmontools kmod-usb-storage kmod-usb-storage-uas ntfs-3g"
+PACKAGES+=" luci-app-diskman luci-app-disks-info smartmontools kmod-usb-storage kmod-usb-storage-uas ntfs-3g"
 # PACKAGES+=" luci-app-tinyfilemanager"
 
 PACKAGES+=" luci-app-mmconfig pdnsd-alt brook"
 
 # Bandwidth And Network Monitoring
-PACKAGES+=" internet-detector luci-app-internet-detector internet-detector-mod-modem-restart nlbwmon luci-app-nlbwmon vnstat2 vnstati2 luci-app-vnstat2 luci-app-netmonitor"
+PACKAGES+=" internet-detector luci-app-internet-detector nlbwmon luci-app-nlbwmon vnstat2 vnstati2 netdata luci-app-netmonitor"
 
 # Speedtest
 PACKAGES+=" librespeed-go python3-speedtest-cli iperf3 luci-app-netspeedtest"
@@ -56,7 +56,7 @@ php8-mod-mysqlnd php8-mod-opcache php8-mod-pdo php8-mod-pdo-mysql php8-mod-phar 
 php8-mod-xml php8-mod-xmlreader php8-mod-xmlwriter php8-mod-zip"
 
 # Misc and some custom .ipk files
-misc+=" luci-app-temp-status luci-app-cpu-status-mini"
+# misc+=" luci-app-temp-status luci-app-cpu-status-mini"
 
 if [ "$1" == "rpi-4" ]; then
     misc+=" kmod-i2c-bcm2835 i2c-tools kmod-i2c-core kmod-i2c-gpio luci-app-oled"
@@ -66,10 +66,10 @@ fi
 
 if [ "$TYPE" == "AMLOGIC" ]; then
     PACKAGES+=" luci-app-amlogic ath9k-htc-firmware btrfs-progs hostapd hostapd-utils kmod-ath kmod-ath9k kmod-ath9k-common kmod-ath9k-htc kmod-cfg80211 kmod-crypto-acompress kmod-crypto-crc32c kmod-crypto-hash kmod-fs-btrfs kmod-mac80211 wireless-tools wpa-cli wpa-supplicant"
-    EXCLUDED+=" -procd-ujail"
+    EXCLUDED+=" "
 fi
 
-PACKAGES+=" $misc zram-swap adb parted losetup resize2fs luci luci-ssl block-mount luci-app-poweroff luci-app-log luci-app-ramfree htop bash curl wget-ssl tar unzip unrar gzip jq luci-app-ttyd nano httping screen openssh-sftp-server"
+PACKAGES+=" $misc zram-swap adb parted losetup resize2fs luci luci-ssl block-mount luci-app-poweroff luci-app-ramfree htop bash curl wget-ssl tar unzip unrar gzip jq luci-app-ttyd nano httping screen openssh-sftp-server"
 
 # Exclude package (must use - before packages name)
 EXCLUDED+=" -dnsmasq -libgd"
