@@ -12,14 +12,14 @@ PACKAGES+=" wget kmod-usb-net-rtl8150 kmod-usb-net-rtl8152 -kmod-usb-net-asix -k
 PACKAGES+=" kmod-mii kmod-usb-net kmod-usb-wdm kmod-usb-net-qmi-wwan uqmi luci-proto-qmi \
 kmod-usb-net-cdc-ether kmod-usb-serial-option kmod-usb-serial kmod-usb-serial-wwan qmi-utils \
 kmod-usb-serial-qualcomm kmod-usb-acm kmod-usb-net-cdc-ncm kmod-usb-net-cdc-mbim umbim \
-modemmanager modemmanager-rpcd luci-proto-modemmanager libmbim libqmi usbutils luci-proto-mbim luci-proto-ncm \
+luci-proto-modemmanager libmbim libqmi usbutils luci-proto-mbim luci-proto-ncm \
 kmod-usb-net-huawei-cdc-ncm kmod-usb-net-cdc-ether kmod-usb-net-rndis kmod-usb-net-sierrawireless kmod-usb-ohci kmod-usb-serial-sierrawireless \
 kmod-usb-uhci kmod-usb2 kmod-usb-ehci kmod-usb-net-ipheth usbmuxd libusbmuxd-utils libimobiledevice-utils usb-modeswitch kmod-nls-utf8 mbim-utils xmm-modem \
 kmod-phy-broadcom kmod-phylib-broadcom kmod-tg3"
 
 PACKAGES+=" lolcat coreutils-stty"
 PACKAGES+=" naiveproxy mihomo luci-app-mihomo"
-PACKAGES+=" luci-app-zerotier tailscale luci-app-tailscale"
+PACKAGES+=" tailscale luci-app-tailscale"
 
 # Modem Tools
 # PACKAGES+=" modeminfo luci-app-modeminfo atinout modemband luci-app-modemband luci-app-mmconfig sms-tool luci-app-sms-tool-js luci-app-lite-watchdog luci-app-3ginfo-lite picocom minicom"
@@ -31,7 +31,7 @@ PASSWALL="ipset ipt2socks iptables iptables-legacy iptables-mod-iprange iptables
 PACKAGES+=" $OPENCLASH $PASSWALL"
 
 # NAS and Hard disk tools
-PACKAGES+=" luci-app-diskman luci-app-disks-info smartmontools kmod-usb-storage kmod-usb-storage-uas ntfs-3g"
+PACKAGES+=" luci-app-diskman smartmontools kmod-usb-storage kmod-usb-storage-uas ntfs-3g"
 # PACKAGES+=" luci-app-tinyfilemanager"
 
 PACKAGES+=" luci-app-mmconfig pdnsd-alt brook"
