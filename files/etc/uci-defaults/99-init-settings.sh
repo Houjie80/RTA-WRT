@@ -39,11 +39,11 @@ echo "Tunnel Installed: $(opkg list-installed | grep -e luci-app-openclash -e lu
 echo "###############################################"
 
 # Set login root password
-(echo "rtawrt"; sleep 1; echo "rtawrt") | passwd > /dev/null
+(echo "sijitekowolu"; sleep 1; echo "sijitekowolu") | passwd > /dev/null
 
 # Set hostname and Timezone to Asia/Jakarta
 echo "Setup NTP Server and Time Zone to Asia/Jakarta"
-uci set system.@system[0].hostname='RTA-WRT'
+uci set system.@system[0].hostname='HOUJIE-WRT'
 uci set system.@system[0].timezone='WIB-7'
 uci set system.@system[0].zonename='Asia/Jakarta'
 uci -q delete system.ntp.server
