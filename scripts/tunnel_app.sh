@@ -9,8 +9,8 @@ openclash_file_down="$(curl -s ${openclash_api} | grep "browser_download_url" | 
 passwall_api="https://api.github.com/repos/xiaorouji/openwrt-passwall/releases"
 passwall_file="luci-23.05_luci-app-passwall"
 passwall_file_down="$(curl -s ${passwall_api} | grep "browser_download_url" | grep -oE "https.*${passwall_file}.*.ipk" | head -n 1)"
-passwall_ipk_packages="$(curl -s ${passwall_api} | grep "browser_download_url" | grep -oE "https.*passwall_packages_ipk_${ARCH}_3.zip" | head -n 1)"
-
+passwall_ipk_packages="$(curl -s ${passwall_api} | grep "browser_download_url" | grep -oE "https.*passwall_packages_ipk_aarch64_generic.zip" | head -n 1)"
+                       
 # Mihomo
 mihomo_api="https://api.github.com/repos/morytyann/OpenWrt-mihomo/releases"
 mihomo_file="mihomo_${ARCH}_3"
@@ -40,7 +40,7 @@ if [ "$?" -ne 0 ]; then
 fi
 
 # Unzip Passwall packages
-unzip -qq packages/"passwall_packages_ipk_${ARCH}_3.zip" -d packages && rm packages/"passwall_packages_ipk_${ARCH}_3.zip"
+unzip -qq packages/"passwall_packages_ipk_aarch64_generic.zip" -d packages && rm packages/"passwall_packages_ipk_aarch64_generic.zip"
 if [ "$?" -ne 0 ]; then
     echo "Error: Failed to unzip Passwall IPK packages."
     exit 1
