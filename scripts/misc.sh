@@ -29,8 +29,7 @@ if [ "$TYPE" == "AMLOGIC" ]; then
     sed -i '/# setup misc settings/ a\chmod +x /lib/netifd/proto/dhcp.sh' files/etc/uci-defaults/99-init-settings.sh
     sed -i '/# setup misc settings/ a\chmod +x /lib/nefitd/proto/dhcpv6.sh' files/etc/uci-defaults/99-init-settings.sh
     sed -i '/# setup misc settings/ a\chmod +x /lib/netifd/proto/ppp.sh' files/etc/uci-defaults/99-init-settings.sh
-    sed -i '/# setup misc settings/ a\chmod +x /usr/bin/inet-hg680p.sh' files/etc/uci-defaults/99-init-settings.sh
-    sed -i '/# setup misc settings/ a\chmod +x /usr/bin/hg680p.sh' files/etc/uci-defaults/99-init-settings.sh
+
 else
     sed -i -E "s|nullwrt|$TYPE|g" files/etc/uci-defaults/99-init-settings.sh
     rm -rf files/lib
