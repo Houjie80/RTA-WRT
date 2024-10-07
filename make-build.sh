@@ -67,6 +67,10 @@ PACKAGES+=" luci-app-base64"
 # Material Theme
 PACKAGES+=" luci-theme-material"
 
+# tools mod
+ PACKAGES+=" luci-app-tailscale luci-app-droidnet luci-app-ipinfo luci-theme-initials luci-theme-hj"
+
+
 # PHP8
 PACKAGES+=" libc php8 php8-fastcgi php8-fpm coreutils-stat zoneinfo-asia php8-cgi \
 php8-cli php8-mod-bcmath php8-mod-calendar php8-mod-ctype php8-mod-curl php8-mod-dom php8-mod-exif \
