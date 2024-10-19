@@ -12,6 +12,7 @@ files1=(
     "libmbim|https://downloads.openwrt.org/snapshots/packages/$ARCH_3/packages"
     "modemmanager|https://downloads.openwrt.org/snapshots/packages/$ARCH_3/packages"
     "sms-tool|https://downloads.openwrt.org/snapshots/packages/$ARCH_3/packages"
+    "luci-app-tinyfm|https://github.com/bobbyunknown/luci-app-tinyfm/releases/download/luci-app-tinyfm-11102024/luci-app-tinyfm_1.0.1_all.ipk
     "luci-app-netspeedtest|https://fantastic-packages.github.io/packages/releases/23.05/packages/x86_64/luci"
     #"python3-speedtest-cli|https://downloads.openwrt.org/releases/packages-$(echo "$BRANCH" | cut -d'.' -f1-2)/$ARCH_3/packages"
     #"librespeed-go|https://downloads.openwrt.org/releases/packages-$(echo "$BRANCH" | cut -d'.' -f1-2)/$ARCH_3/packages"
