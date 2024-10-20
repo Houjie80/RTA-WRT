@@ -32,10 +32,10 @@ luci-mod-status luci-mod-system luci-proto-bonding \
 luci-proto-ppp lolcat coreutils-stty git git-http"
 
 
-PACKAGES+=" luci-app-zerotier luci-app-cloudflared tailscale luci-app-tailscale"
+PACKAGES+=" tailscale luci-app-tailscale"
 
 # Modem Tools
-PACKAGES+=" modeminfo luci-app-modeminfo atinout modemband luci-app-modemband luci-app-mmconfig sms-tool luci-app-sms-tool-js luci-app-lite-watchdog luci-app-3ginfo-lite picocom minicom"
+# PACKAGES+=" modeminfo luci-app-modeminfo atinout modemband luci-app-modemband luci-app-mmconfig sms-tool luci-app-sms-tool-js luci-app-lite-watchdog luci-app-3ginfo-lite picocom minicom"
 
 # Tunnel option
 OPENCLASH="coreutils-nohup bash dnsmasq-full curl ca-certificates ipset ip-full libcap libcap-bin ruby ruby-yaml kmod-tun kmod-inet-diag unzip kmod-nft-tproxy luci-compat luci luci-base luci-app-openclash"
@@ -50,13 +50,13 @@ MIHOMO+="mihomo luci-app-mihomo"
 PACKAGES+=" $OPENCLASH $MIHOMO"
 
 # NAS and Hard disk tools
-PACKAGES+=" luci-app-diskman luci-app-hd-idle luci-app-disks-info smartmontools kmod-usb-storage kmod-usb-storage-uas ntfs-3g"
-# PACKAGES+=" luci-app-tinyfilemanager"
+PACKAGES+=" luci-app-diskman smartmontools kmod-usb-storage kmod-usb-storage-uas ntfs-3g"
+PACKAGES+=" luci-app-tinyfilemanager"
 
 PACKAGES+=" luci-app-mmconfig pdnsd-alt brook"
 
 # Bandwidth And Network Monitoring
-PACKAGES+=" internet-detector luci-app-internet-detector internet-detector-mod-modem-restart nlbwmon luci-app-nlbwmon vnstat2 vnstati2 luci-app-vnstat2 luci-app-netmonitor"
+PACKAGES+=" internet-detector luci-app-internet-detector nlbwmon luci-app-nlbwmon vnstat2 vnstati2 netdata luci-app-netmonitor"
 
 # Speedtest
 PACKAGES+=" librespeed-go python3-speedtest-cli iperf3 luci-app-netspeedtest"
@@ -75,7 +75,7 @@ php8-mod-mysqlnd php8-mod-opcache php8-mod-pdo php8-mod-pdo-mysql php8-mod-phar 
 php8-mod-xml php8-mod-xmlreader php8-mod-xmlwriter php8-mod-zip libopenssl-legacy"
 
 # Misc and some custom .ipk files
-misc+=" luci-app-temp-status luci-app-cpu-status-mini"
+misc+=" "
 
 if [ "$1" == "rpi-4" ]; then
     misc+=" kmod-i2c-bcm2835 i2c-tools kmod-i2c-core kmod-i2c-gpio luci-app-oled"
