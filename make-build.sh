@@ -43,11 +43,11 @@ PASSWALL="coreutils coreutils-base64 coreutils-nohup curl \
 chinadns-ng dns2socks dns2tcp dnsmasq-full ip-full \
 libuci-lua lua luci-compat luci-lib-jsonc \
 microsocks resolveip tcping \
-hysteria ipt2socks naiveproxy shadowsocks-rust-sslocal shadowsocks-rust-ssserver shadowsocksr-libev-ssr-local \
+hysteria ipt2socks shadowsocks-rust-sslocal shadowsocks-rust-ssserver shadowsocksr-libev-ssr-local \
 shadowsocksr-libev-ssr-redir shadowsocksr-libev-ssr-server simple-obfs sing-box trojan-plus tuic-client v2ray-geoip v2ray-geosite v2ray-plugin xray-core xray-plugin luci-app-passwall"
 MIHOMO+="mihomo luci-app-mihomo"
 
-PACKAGES+=" $OPENCLASH $PASSWALL $MIHOMO"
+PACKAGES+=" $OPENCLASH $MIHOMO"
 
 # NAS and Hard disk tools
 PACKAGES+=" luci-app-diskman luci-app-hd-idle luci-app-disks-info smartmontools kmod-usb-storage kmod-usb-storage-uas ntfs-3g"
@@ -101,6 +101,10 @@ freeradius3-mod-expiration freeradius3-mod-expr freeradius3-mod-files freeradius
 freeradius3-mod-mschap freeradius3-mod-pap freeradius3-mod-preprocess freeradius3-mod-radutmp \
 freeradius3-mod-realm freeradius3-mod-sql freeradius3-mod-sql-mysql freeradius3-mod-sqlcounter \
 freeradius3-mod-unix freeradius3-utils libfreetype wget-ssl curl unzip tar zoneinfo-asia coova-chilli"
+
+PACKAGES+=" node node-npm"
+
+PACKAGES+=" luci-app-radmon-php8 luci-app-whatsapp-bot"
 
 # Exclude package (must use - before packages name)
 EXCLUDED+=" -dnsmasq -libgd"
