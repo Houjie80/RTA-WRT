@@ -16,6 +16,7 @@ make_path="${PWD}"
 openwrt_dir="imagebuilder"
 imagebuilder_path="${make_path}/${openwrt_dir}"
 custom_files_path="${make_path}/files"
+custom_packages_path="${make_path}/packages"
 custom_scripts_file="${make_path}/scripts"
 
 # Set default parameters
@@ -44,10 +45,13 @@ download_packages() {
             for file_url in $file_urls; do
                 if [ -n "$file_url" ]; then
                     echo -e "${INFO} Downloading $(basename "$file_url")"
-                    echo -e "${INFO} from $file_url"
-                    curl -fsSOL "$(basename "$file_url")" "$file_url"
-                    echo -e "${SUCCESS} Packages [$filename] downloaded successfully!"
-                    break
+                    echo -e "${INFO} From $file_url"
+                    curl -fsSL -o "$(basename "$file_url")" "$file_url"
+                    if [ $? -eq 0 ]; then
+                        echo -e "${SUCCESS} Package [$filename] downloaded successfully."
+                    else
+                        error_msg "Failed to download package [$filename]."
+                    fi
                 else
                     error_msg "Failed to retrieve packages [$filename]. Retrying before exit..."
                 fi
@@ -62,12 +66,11 @@ download_packages() {
                 echo -e "${WARNING} No matching stable file found. Trying general search..."
                 file_urls=$(curl -sL "$base_url" | grep -oE "${filename}_[0-9a-zA-Z\._~-]*\.ipk" | sort -V | tail -n 1)
             fi
-            echo -e "${INFO} Matching files found:"
-            echo -e "${INFO} $file_urls"
             if [ -n "$file_urls" ]; then
                 full_url="$base_url/$file_urls"
-                echo -e "${INFO} Downloading $filename from $full_url"
-                curl -fsSOL "${filename}.ipk" "$full_url"
+                echo -e "${INFO} Downloading $file_urls"
+                echo -e "${INFO} From $full_url"
+                curl -fsSL -o "${filename}.ipk" "$full_url"
                 if [ $? -eq 0 ]; then
                     echo -e "${SUCCESS} Package [$filename] downloaded successfully."
                 else
@@ -150,14 +153,16 @@ download_imagebuilder() {
     cd ${make_path}
     echo -e "${STEPS} Start downloading OpenWrt files..."
 
-    if [[ "${op_target}" == "amlogic" || "${op_target}" == "armsr-armv8" ]]; then
+    if [[ "${op_target}" == "amlogic" || "${op_target}" == "AMLOGIC" ]]; then
+        op_target="amlogic"
         target_profile=""
         target_system="armsr/armv8"
         target_name="armsr-armv8"
         ARCH_1="armv8"
         ARCH_2="aarch64"
         ARCH_3="aarch64_generic"
-    elif [[ "${op_target}" == "rpi-3" || "${op_target}" == "bcm27xx-bcm2710" ]]; then
+    elif [[ "${op_target}" == "rpi-3" ]]; then
+        op_target="rpi-3"
         target_profile="rpi-3"
         target_system="bcm27xx/bcm2710"
         target_name="bcm27xx-bcm2710"
@@ -165,6 +170,7 @@ download_imagebuilder() {
         ARCH_2="aarch64"
         ARCH_3="aarch64_cortex-a53"
     elif [[ "${op_target}" == "rpi-4" ]]; then
+        op_target="rpi-4"
         target_profile="rpi-4"
         target_system="bcm27xx/bcm2711"
         target_name="bcm27xx-bcm2711"
@@ -172,6 +178,7 @@ download_imagebuilder() {
         ARCH_2="aarch64"
         ARCH_3="aarch64_cortex-a72"
     elif [[ "${op_target}" == "friendlyarm_nanopi-r2c" ]]; then
+        op_target="nanopi-r2c"
         target_profile="friendlyarm_nanopi-r2c"
         target_system="rockchip/armv8"
         target_name="rockchip-armv8"
@@ -179,6 +186,7 @@ download_imagebuilder() {
         ARCH_2="aarch64"
         ARCH_3="aarch64_generic"
     elif [[ "${op_target}" == "friendlyarm_nanopi-r2s" ]]; then
+        op_target="nanopi-r2s"
         target_profile="friendlyarm_nanopi-r2s"
         target_system="rockchip/armv8"
         target_name="rockchip-armv8"
@@ -186,6 +194,7 @@ download_imagebuilder() {
         ARCH_2="aarch64"
         ARCH_3="aarch64_generic"
     elif [[ "${op_target}" == "friendlyarm_nanopi-r4s" ]]; then
+        op_target="nanopi-r4s"
         target_profile="friendlyarm_nanopi-r4s"
         target_system="rockchip/armv8"
         target_name="rockchip-armv8"
@@ -193,6 +202,7 @@ download_imagebuilder() {
         ARCH_2="aarch64"
         ARCH_3="aarch64_generic"
     elif [[ "${op_target}" == "xunlong_orangepi-r1-plus" ]]; then
+        op_target="orangepi-r1-plus"
         target_profile="xunlong_orangepi-r1-plus"
         target_system="rockchip/armv8"
         target_name="rockchip-armv8"
@@ -200,6 +210,7 @@ download_imagebuilder() {
         ARCH_2="aarch64"
         ARCH_3="aarch64_generic"
     elif [[ "${op_target}" == "xunlong_orangepi-r1-plus-lts" ]]; then
+        op_target="orangepi-r1-plus-lts"
         target_profile="xunlong_orangepi-r1-plus-lts"
         target_system="rockchip/armv8"
         target_name="rockchip-armv8"
@@ -207,6 +218,7 @@ download_imagebuilder() {
         ARCH_2="aarch64"
         ARCH_3="aarch64_generic"
     elif [[ "${op_target}" == "generic" || "${op_target}" == "x86-64" || "${op_target}" == "x86_64" ]]; then
+        op_target="x86-64"
         target_profile="generic"
         target_system="x86/64"
         target_name="x86-64"
@@ -234,24 +246,29 @@ adjust_settings() {
     cd ${imagebuilder_path}
     echo -e "${STEPS} Start adjusting .config file settings..."
 
-    sed -i '\|option check_signature| s|^|#|' repositories.conf
-    sed -i "s/install \$(BUILD_PACKAGES)/install \$(BUILD_PACKAGES) --force-overwrite --force-downgrade/" Makefile
+    if [[ -s "repositories.conf" ]]; then
+        sed -i '\|option check_signature| s|^|#|' repositories.conf
+    fi
+
+    if [[ -s "Makefile" ]]; then
+        sed -i "s/install \$(BUILD_PACKAGES)/install \$(BUILD_PACKAGES) --force-overwrite --force-downgrade/" Makefile
+    fi
 
     # For .config file
     if [[ -s ".config" ]]; then
 
         # Resize Boot and Rootfs partition size
-        option_squashfs=$( [ "$ROOTFS_SQUASHFS" == "true" ] && echo "CONFIG_TARGET_ROOTFS_SQUASHFS=y" || echo "# CONFIG_TARGET_ROOTFS_SQUASHFS is not set" )
         sed -i "s/CONFIG_TARGET_KERNEL_PARTSIZE=.*/CONFIG_TARGET_KERNEL_PARTSIZE=128/" .config
         sed -i "s/CONFIG_TARGET_ROOTFS_PARTSIZE=.*/CONFIG_TARGET_ROOTFS_PARTSIZE=1024/" .config
-        sed -i "s/CONFIG_TARGET_ROOTFS_SQUASHFS=y/$option_squashfs/" .config
-        # Root filesystem archives
-        sed -i "s|CONFIG_TARGET_ROOTFS_CPIOGZ=.*|# CONFIG_TARGET_ROOTFS_CPIOGZ is not set|g" .config
-        # Root filesystem images
-        sed -i "s|CONFIG_TARGET_ROOTFS_EXT4FS=.*|# CONFIG_TARGET_ROOTFS_EXT4FS is not set|g" .config
-        sed -i "s|CONFIG_TARGET_IMAGES_GZIP=.*|# CONFIG_TARGET_IMAGES_GZIP is not set|g" .config
 
-        if [[ "$op_target" == "x86_64" ]]; then
+        if [ "$op_target" == "amlogic" ]; then
+            sed -i "s|CONFIG_TARGET_ROOTFS_CPIOGZ=.*|# CONFIG_TARGET_ROOTFS_CPIOGZ is not set|g" .config
+            sed -i "s|CONFIG_TARGET_ROOTFS_EXT4FS=.*|# CONFIG_TARGET_ROOTFS_EXT4FS is not set|g" .config
+            sed -i "s|CONFIG_TARGET_ROOTFS_SQUASHFS=.*|# CONFIG_TARGET_ROOTFS_SQUASHFS is not set|g" .config
+            sed -i "s|CONFIG_TARGET_IMAGES_GZIP=.*|# CONFIG_TARGET_IMAGES_GZIP is not set|g" .config
+        fi
+
+        if [ "$ARCH_2" == "x86_64" ]; then
             # Not generate ISO images for it is too big
             sed -i "s/CONFIG_ISO_IMAGES=y/# CONFIG_ISO_IMAGES is not set/" .config
             # Not generate VHDX images
@@ -261,8 +278,6 @@ adjust_settings() {
         echo -e "${INFO} [ ${imagebuilder_path} ] directory status: $(ls -al 2>/dev/null)"
         error_msg "There is no .config file in the [ ${download_file} ]"
     fi
-
-    bash 
 
     sync && sleep 3
     echo -e "${INFO} [ ${imagebuilder_path} ] directory status: $(ls -al 2>/dev/null)"
@@ -276,7 +291,15 @@ custom_packages() {
     echo -e "${STEPS} Start adding custom packages..."
 
     # Create a [ packages ] directory
-    [[ -d "packages" ]] || mkdir packages
+    [[ -d "packages" ]] || mkdir -p packages
+    if [[ -d "${custom_packages_path}" ]]; then
+        # Copy custom packages
+        cp -rf ${custom_packages_path}/* packages
+        echo -e "${INFO} [ packages ] directory status: $(ls packages -al 2>/dev/null)"
+    else
+        echo -e "${WARNING} No customized Packages were added."
+    fi
+
     cd packages
 
     # Download IPK From Github
@@ -410,7 +433,7 @@ custom_files() {
         sync && sleep 3
         echo -e "${INFO} [ files ] directory status: $(ls files -al 2>/dev/null)"
     else
-        echo -e "${INFO} No customized files were added."
+        echo -e "${WARNING} No customized files were added."
     fi
 }
 
@@ -516,11 +539,15 @@ rebuild_firmware() {
     EXCLUDED+=" -dnsmasq -libgd"
 
     # Rebuild firmware
+    make clean
     make image PROFILE="${target_profile}" PACKAGES="${PACKAGES} ${EXCLUDED}" FILES="files"
-
-    sync && sleep 3
-    echo -e "${INFO} [ ${openwrt_dir}/bin/targets/*/* ] directory status: $(ls bin/targets/*/* -al 2>/dev/null)"
-    echo -e "${SUCCESS} The rebuild is successful, the current path: [ ${PWD} ]"
+    if [ $? -ne 0 ]; then
+        error_msg "OpenWrt build failed. Check logs for details."
+    else
+        sync && sleep 3
+        echo -e "${INFO} [ ${openwrt_dir}/bin/targets/*/* ] directory status: $(ls bin/targets/*/* -al 2>/dev/null)"
+        echo -e "${SUCCESS} The rebuild is successful, the current path: [ ${PWD} ]"
+    fi
 }
 
 # Show welcome message
