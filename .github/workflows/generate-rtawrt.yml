@@ -298,7 +298,7 @@ jobs:
         uses: ncipollo/release-action@main
         if: ${{ steps.prepare2.outputs.status }} == 'success' && !cancelled()
         with:
-          tag: OpenWrt_imagebuilder_${{ env.RELEASES_TAG }}
+          tag: OpenWrt_imagebuilder_${{ env.RELEASES_TAG }}_${{ inputs.target }}
           artifacts: imagebuilder/compiled_images/*
           allowUpdates: true
           removeArtifacts: false
