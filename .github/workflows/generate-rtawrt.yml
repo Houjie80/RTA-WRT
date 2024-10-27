@@ -252,7 +252,6 @@ jobs:
             cd ophub_builder
             sudo ./remake -b ${{ env.openwrt_board }} -k ${{ inputs.openwrt_kernel }} -s ${{ inputs.rootfs_size }}
             for file in openwrt/out/*.img.gz; do cp -f "$file" ../compiled_images; done
-            for file in ophub_builder/openwrt-armvirt/*.tar.gz; do cp -f "$file" ../compiled_images; done
           fi
 
       - name: Prepare Before Uploads
@@ -283,8 +282,10 @@ jobs:
                       if [[ "${{ env.TARGET_NAME }}" == "amlogic" ]]; then
                         kernel=$(echo "$file" | grep -oP 'k[0-9.]+')
                         new_name="RTA-WRT_${{ env.RELEASES_TAG }}_${replace}_${kernel}.img.gz"
+                        new_name="RTA-WRT_${{ env.RELEASES_TAG }}_${replace}_${kernel}.tar.gz"
                       else
                         new_name="RTA-WRT_${{ env.RELEASES_TAG }}_${replace}.img.gz"
+                        new_name="RTA-WRT_${{ env.RELEASES_TAG }}_${replace}.tar.gz"
                       fi
                       echo -e "${MSG_INFO} Renaming: $file -> $new_name"
                       mv "$file" "compiled_images/$new_name"
