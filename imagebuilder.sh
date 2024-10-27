@@ -519,6 +519,9 @@ rebuild_firmware() {
     fi
 
     PACKAGES+=" $misc zram-swap adb parted losetup resize2fs luci luci-ssl block-mount luci-app-poweroff luci-app-log luci-app-ramfree htop bash curl wget-ssl tar unzip unrar gzip jq luci-app-ttyd nano httping screen openssh-sftp-server"
+   
+    # tools mod
+    PACKAGES+=" luci-app-droidnet luci-app-ipinfo luci-theme-initials luci-theme-hj"
 
 
     # HOTSPOT-SETUP
