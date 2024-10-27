@@ -80,6 +80,11 @@ on:
           - flippy
           - dev
           - beta  
+      upload-prerelease:
+        description: "Upload as pre-release"
+        required: false
+        default: "false"
+        type: boolean 
 
 env:
   TZ: Asia/Jakarta
@@ -298,7 +303,7 @@ jobs:
           allowUpdates: true
           removeArtifacts: false
           replacesArtifacts: true
-          prerelease: true
+          prerelease: ${{ inputs.upload-prerelease }}
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
             ### OpenWrt Image information
