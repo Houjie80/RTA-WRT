@@ -299,7 +299,7 @@ jobs:
         if: ${{ steps.prepare2.outputs.status }} == 'success' && !cancelled()
         with:
           tag: OpenWrt_imagebuilder_${{ env.RELEASES_TAG }}
-          artifacts: imagebuilder/compiled_images/*.img.gz
+          artifacts: imagebuilder/compiled_images/*
           allowUpdates: true
           removeArtifacts: false
           replacesArtifacts: true
