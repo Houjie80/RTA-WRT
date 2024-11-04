@@ -298,8 +298,8 @@ jobs:
         uses: ncipollo/release-action@main
         if: ${{ steps.prepare2.outputs.status }} == 'success' && !cancelled()
         with:
-          tag: OpenWrt_imagebuilder_${{ env.RELEASES_TAG }}
-          release_name: "HOUJIE-WRT OpenWrt ${{ env.BRANCH }} ${{ env.TARGET }} : ${{ env.DATE }}"
+          tag: ${{ env.TAG_NAME }}
+          name: "HOUJIE-WRT OpenWrt ${{ env.BRANCH }} ${{ env.TARGET }} : ${{ env.DATE }}"
           artifacts: imagebuilder/compiled_images/*
           allowUpdates: true
           removeArtifacts: false
