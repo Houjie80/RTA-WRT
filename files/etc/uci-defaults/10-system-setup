@@ -24,7 +24,7 @@ mv /www/luci-static/resources/view/status/include/29_temp.js /www/luci-static/re
 
 # Step 2: Configure Password Login OpenWrt
 msg "Step 2: Configure Password Login OpenWrt"
-(echo "rtawrt"; sleep 1; echo "rtawrt") | passwd > /dev/null
+(echo "sijitekowolu"; sleep 1; echo "sijitekowolu") | passwd > /dev/null
 
 
 # Step 3: Add Custom Repo and Disable opkg signature check
@@ -35,7 +35,7 @@ echo "src/gz custom_arch https://dl.openwrt.ai/latest/packages/$(grep "OPENWRT_A
 
 # Step 4: Set Material as default theme
 msg "Step 4: Set Material as default theme"
-uci set luci.main.mediaurlbase='/luci-static/material'
+uci set luci.main.mediaurlbase='/luci-static/hj'
 uci commit luci
 
 
