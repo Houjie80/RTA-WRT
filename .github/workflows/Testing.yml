@@ -281,9 +281,9 @@ jobs:
                   if [[ -f "$file" ]]; then
                       if [[ "${{ env.TARGET_NAME }}" == "amlogic" ]]; then
                         kernel=$(echo "$file" | grep -oP 'k[0-9.]+')
-                        new_name="RTA-WRT_${{ env.RELEASES_TAG }}_${replace}_${kernel}.img.gz"
+                        new_name="HOUJIE-WRT_${{ env.RELEASES_TAG }}_${replace}_${kernel}.img.gz"
                       else
-                        new_name="RTA-WRT_${{ env.RELEASES_TAG }}_${replace}.img.gz"
+                        new_name="HOUJIE-WRT_${{ env.RELEASES_TAG }}_${replace}.img.gz"
                       fi
                       echo -e "${MSG_INFO} Renaming: $file -> $new_name"
                       mv "$file" "compiled_images/$new_name"
