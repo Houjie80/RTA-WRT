@@ -82,100 +82,66 @@ jobs:
           sudo apt-get -qq update
           sudo apt-get -qq install build-essential libncurses5-dev libncursesw5-dev zlib1g-dev gawk git gettext libssl-dev xsltproc rsync wget unzip tar gzip qemu-utils mkisofs
           sudo timedatectl set-timezone "$TZ"
-          MSG_STEPS="[\033[95m STEPS \033[0m]"
-          MSG_INFO="[\033[94m INFO \033[0m]"
-          MSG_SUCCESS="[\033[92m SUCCESS \033[0m]"
-          MSG_WARNING="[\033[93m WARNING \033[0m]"
-          MSG_ERROR="[\033[91m ERROR \033[0m]"
           echo "TARGET=${{ matrix.target }}" >> $GITHUB_ENV
-          echo -e "${MSG_INFO} TARGET: ${{ matrix.target }}" 
-
-    #   - name: Initialization environment (deep)
-    #     if: github.event.inputs.target == 'all' && !cancelled()
-    #     env:
-    #       DEBIAN_FRONTEND: noninteractive
-    #     run: |
-    #       docker rmi $(docker images -q) 2>/dev/null
-    #       [[ -n "${AGENT_TOOLSDIRECTORY}" ]] && sudo rm -rf "${AGENT_TOOLSDIRECTORY}"
-    #       sudo rm -rf /usr/share/dotnet /etc/apt/sources.list.d /usr/local/lib/android 2>/dev/null
-    #       sudo swapoff -a
-    #       sudo rm -f /swapfile /mnt/swapfile
-    #       sudo -E apt-get -y update
-    #       sudo -E apt-get -y purge azure-cli ghc* zulu* llvm* firefox google* dotnet* powershell openjdk* mongodb* moby* || true
-    #       sudo -E apt-get -y install $(curl -fsSL https://is.gd/depend_ubuntu2204_openwrt)
-    #       sudo -E systemctl daemon-reload
-    #       #sudo -E apt-get -y full-upgrade
-    #       sudo -E apt-get -y autoremove --purge
-    #       sudo -E apt-get clean
-    #       sudo sed -i '/NVM_DIR/d;/skel/d' /root/{.bashrc,.profile}
-    #       sudo rm -rf ~/{.cargo,.dotnet,.rustup}
-    #       sudo timedatectl set-timezone "${TZ}"
-    #       echo "TARGET=${{ matrix.target }}" >> $GITHUB_ENV
-
-    #   - name: Create simulated physical disk
-    #     if: github.event.inputs.target == 'all' && !cancelled()
-    #     run: |
-    #       mnt_size=$(expr $(df -h /mnt | tail -1 | awk '{print $4}' | sed 's/[[:alpha:]]//g' | sed 's/\..*//') - 1)
-    #       root_size=$(expr $(df -h / | tail -1 | awk '{print $4}' | sed 's/[[:alpha:]]//g' | sed 's/\..*//') - 4)
-    #       sudo truncate -s "${mnt_size}"G /mnt/mnt.img
-    #       sudo truncate -s "${root_size}"G /root.img
-    #       sudo losetup /dev/loop6 /mnt/mnt.img
-    #       sudo losetup /dev/loop7 /root.img
-    #       sudo pvcreate /dev/loop6
-    #       sudo pvcreate /dev/loop7
-    #       sudo vgcreate github /dev/loop6 /dev/loop7
-    #       sudo lvcreate -n runner -l 100%FREE github
-    #       sudo mkfs.xfs /dev/github/runner
-    #       sudo mkdir -p /builder
-    #       sudo mount /dev/github/runner /builder
-    #       sudo chown -R runner.runner /builder
-    #       df -Th
+          echo -e "[\033[94m INFO \033[0m] TARGET: ${{ matrix.target }}"
+          echo "DATE=$(date +'%Y%m%d')" >> $GITHUB_ENV
 
       - name: Setup Environment Variables
         id: init
         run: |
           if [ "$TARGET" == "Raspberry Pi 3B" ]; then
             echo "TARGET_NAME=rpi-3" >> $GITHUB_ENV
+            echo "TAG_NAME=openwrt_rpi-3" >> $GITHUB_ENV
           elif [ "$TARGET" == "Raspberry Pi 4B" ]; then
             echo "TARGET_NAME=rpi-4" >> $GITHUB_ENV
+            echo "TAG_NAME=openwrt_rpi-4" >> $GITHUB_ENV
           elif [ "$TARGET" == "NanoPi R2C" ]; then
             echo "TARGET_NAME=friendlyarm_nanopi-r2c" >> $GITHUB_ENV
+            echo "TAG_NAME=openwrt_friendlyarm_nanopi-r2c" >> $GITHUB_ENV
           elif [ "$TARGET" == "NanoPi R2S" ]; then
             echo "TARGET_NAME=friendlyarm_nanopi-r2s" >> $GITHUB_ENV
+            echo "TAG_NAME=openwrt_friendlyarm_nanopi-r2s" >> $GITHUB_ENV
           elif [ "$TARGET" == "NanoPi R4S" ]; then
             echo "TARGET_NAME=friendlyarm_nanopi-r4s" >> $GITHUB_ENV
+            echo "TAG_NAME=openwrt_friendlyarm_nanopi-r4s" >> $GITHUB_ENV
           elif [ "$TARGET" == "Orange Pi R1 Plus" ]; then
             echo "TARGET_NAME=xunlong_orangepi-r1-plus" >> $GITHUB_ENV
+            echo "TAG_NAME=openwrt_xunlong_orangepi-r1-plus" >> $GITHUB_ENV
           elif [ "$TARGET" == "Orange Pi R1 Plus LTS" ]; then
             echo "TARGET_NAME=xunlong_orangepi-r1-plus-lts" >> $GITHUB_ENV
+            echo "TAG_NAME=openwrt_xunlong_xunlong_orangepi-r1-plus-lts" >> $GITHUB_ENV
           elif [ "$TARGET" == "x86-64" ]; then
             echo "TARGET_NAME=generic" >> $GITHUB_ENV
+            echo "TAG_NAME=openwrt_generic" >> $GITHUB_ENV
           elif [ "$TARGET" == "Amlogic HG680P" ]; then
             echo "TARGET_NAME=amlogic" >> $GITHUB_ENV
             echo "openwrt_board=s905x" >> $GITHUB_ENV
+            echo "TAG_NAME=openwrt_amlogic_s905x" >> $GITHUB_ENV
           elif [ "$TARGET" == "Amlogic B860H-V5" ]; then
             echo "TARGET_NAME=amlogic" >> $GITHUB_ENV
             echo "openwrt_board=s905x-b860h" >> $GITHUB_ENV
+            echo "TAG_NAME=openwrt_amlogic_s905x-b860h" >> $GITHUB_ENV
           elif [ "$TARGET" == "Amlogic B860H-V1-V2" ]; then
             echo "TARGET_NAME=amlogic" >> $GITHUB_ENV
             echo "openwrt_board=s905x2" >> $GITHUB_ENV
+            echo "TAG_NAME=openwrt_amlogic_s905x2" >> $GITHUB_ENV
           fi
           echo "status=success" >> ${GITHUB_OUTPUT}
-          echo -e "${MSG_SUCCESS} Status: Success"
+          echo -e "[\033[92m SUCCESS \033[0m] Status: Success"
 
 
       - name: Build OpenWrt Rootfs [ ${{ inputs.releases_branch }} ]
         id: imagebuilder
         if: ${{ steps.init.outputs.status }} == 'success' && !cancelled()
         run: |
-          echo -e "${MSG_STEPS} Building OpenWrt And Rootfs"
+          echo -e "[\033[95m STEPS \033[0m] Building OpenWrt And Rootfs"
           TARGET_NAME="${{ env.TARGET_NAME }}"
           RELEASES_BRANCH="${{ inputs.releases_branch }}"
           chmod +x ${IMAGEBUILDER_SH}
           bash ${IMAGEBUILDER_SH} ${RELEASES_BRANCH} "${{ env.TARGET_NAME }}"
           echo "RELEASES_TAG=${RELEASES_BRANCH/:/_}" >> ${GITHUB_ENV}
           echo "status=success" >> ${GITHUB_OUTPUT}
-          echo -e "${MSG_SUCCESS} Status: Success"
+          echo -e "[\033[92m SUCCESS \033[0m] Status: Success"
   
       - name: Clear server space
         if: ${{ steps.imagebuilder.outputs.status }} == 'success' && !cancelled()
@@ -187,7 +153,7 @@ jobs:
       - name: Prepare file First
         run: |
           cd imagebuilder
-          echo -e "${MSG_STEPS} Prepare File.."
+          echo -e "[\033[95m STEPS \033[0m] Prepare File.."
           mkdir -p compiled_images
           if [[ "${{ env.TARGET_NAME }}" != "amlogic" ]]; then
             for file in bin/targets/*/*/*.img.gz; do mv "$file" compiled_images; done
@@ -200,7 +166,7 @@ jobs:
         run: |
           cd imagebuilder
           if [[ "${{ env.TARGET_NAME }}" == "amlogic" ]]; then
-            echo -e "${MSG_STEPS} Cloning Ophub Repacking Amlogic"
+            echo -e "[\033[95m STEPS \033[0m] Cloning Ophub Repacking Amlogic"
             git clone --depth 1 https://github.com/ophub/amlogic-s9xxx-openwrt.git ophub_builder
             mkdir -p ophub_builder/openwrt-armvirt
             mv compiled_images/*rootfs.tar.gz ophub_builder/openwrt-armvirt/
@@ -213,7 +179,7 @@ jobs:
         id: prepare2
         run: |
           cd imagebuilder
-          echo -e "${MSG_STEPS} Replace Name"
+          echo -e "[\033[95m STEPS \033[0m] Replace Name"
           search_replace_patterns=(
               "bcm27xx-bcm2710-rpi-3|Raspberry-Pi-3_ext4-sysupgrade"
               "bcm27xx-bcm2711-rpi-4|Raspberry-Pi-4_ext4-sysupgrade"
@@ -224,6 +190,8 @@ jobs:
               "rockchip-armv8-xunlong_orangepi-r1-plus-lts|Orange-Pi-R1-Plus-LTS_ext4-sysupgrade"
               "x86-64-generic-ext4-combined-efi|x86-64-Generic_ext4-combined-efi"
               "x86-64-generic-ext4-combined|x86-64-Generic_ext4-combined"
+              "x86-64-generic-squashfs-combined-efi|x86-64-Generic_squashfs-combined-efi"
+              "x86-64-generic-squashfs-combined|x86-64-Generic_squashfs-combined"
               "_amlogic_s905x_|Amlogic_HG680P"
               "_amlogic_s905x-b860h_|Amlogic_B860HV1-V2"
               "_amlogic_s905x2_|Amlogic_B860HV5"
@@ -240,34 +208,33 @@ jobs:
                       else
                         new_name="RTA-WRT_${{ env.RELEASES_TAG }}_${replace}.img.gz"
                       fi
-                      echo -e "${MSG_INFO} Renaming: $file -> $new_name"
+                      echo -e "[\033[94m INFO \033[0m] Renaming: $file -> $new_name"
                       mv "$file" "compiled_images/$new_name"
                   fi
               done
           done
           echo "status=success" >> ${GITHUB_OUTPUT}
-          echo -e "${MSG_SUCCESS} Status: Success"
+          echo -e "[\033[92m SUCCESS \033[0m] Status: Success"
           echo -e "INFO files list: \n$(ls -l compiled_images 2>/dev/null)"
   
-      - name: Upload the packaged OpenWrt
+      - name: Upload the packaged OpenWrt | ${{ matrix.target }}
         uses: ncipollo/release-action@main
         if: ${{ steps.prepare2.outputs.status }} == 'success' && !cancelled()
         with:
-          tag: OpenWrt_imagebuilder_${{ env.RELEASES_TAG }}
+          tag: ${{ env.TAG_NAME }}
+          name: OpenWrt - ${{ env.TARGET }}
           artifacts: imagebuilder/compiled_images/*.img.gz
           allowUpdates: true
-          removeArtifacts: false
+          removeArtifacts: true
           replacesArtifacts: true
-          prerelease: true
+          prerelease: false
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
             ### OpenWrt Image information
             - Default IP: 192.168.1.1
             - Default username: root
-            - Default password: password
-            - Default WIFI name: OpenWrt
+            - Default password: rtawrt
+            - Default WIFI name: RTAWRT_2G | RTAWRT_5G
             - Default WIFI password: none
-            ### Install to EMMC
+            ### Install to EMMC For Amlogic
             - Login to OpenWrt → System → Amlogic Service → Install OpenWrt
-            ### OpenWrt Image Verification
-            - sha256sum

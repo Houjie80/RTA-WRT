@@ -5,20 +5,11 @@
 </h1>
 
 <h3 align="center">Openwrt Terbaru - 23.05.5</h3>
-<h4 align="center">Download Di Bawah Ini Untuk Versi Stabil</h4>
-<p align="center">
-<a href="https://github.com/rtaserver/RTA-WRT/releases/tag/23.05.5-20241010"><img src="https://img.shields.io/badge/Build_Latest-20241010-blue?style=for-the-badge&logo=openwrt"></a>
-<a href="https://github.com/rtaserver/RTA-WRT/releases/tag/23.05.5-amlogic-20241010"><img src="https://img.shields.io/badge/Amlogic_Latest-20241010-blue?style=for-the-badge&logo=openwrt"></a>
-</p>
-<h4 align="center">Download Di Bawah Ini Untuk Versi Pengembang</h4>
-<p align="center">
-<a href="https://github.com/rtaserver/RTA-WRT/releases/tag/OpenWrt_Prerelease"><img src="https://img.shields.io/badge/Build_Pre--Release-here-dl?style=for-the-badge&logo=openwrt&labelColor=f0d22d&color=blue"></a>
-<a href="https://github.com/rtaserver/RTA-WRT/releases/tag/Amlogic_Prerelease"><img src="https://img.shields.io/badge/Amlogic_Pre--Release-here-dl?style=for-the-badge&logo=openwrt&labelColor=f0d22d&color=blue"></a>
-</p>
-<h4 align="center">Join Telegram Untuk Mendapatkan Notifikasi Update Dan Tutorial</h4>
+
+<!-- <h4 align="center">Join Telegram Untuk Mendapatkan Notifikasi Update Dan Tutorial</h4>
 <p align="center">
 <a href="https://t.me/rta_wrt"><img src="https://img.shields.io/badge/Chanel_Telegram-Klik_Disini-bg?style=for-the-badge&logo=telegram"></a>
-</p>
+</p> -->
 
 <p align="center">
 Builder With ImageBuilder
@@ -29,15 +20,27 @@ Custom Script By FriWrt
 <br>
 
 
-[![Auto Trigger Build Openwrt Latest](https://github.com/rtaserver/RTA-WRT/actions/workflows/auto-openwrt-trigger-build-latest.yml/badge.svg)](https://github.com/rtaserver/RTA-WRT/actions/workflows/auto-openwrt-trigger-build-latest.yml)
-[![Generate RTA-WRT Amlogic Firmware](https://github.com/rtaserver/RTA-WRT/actions/workflows/generate-rtawrt-amlogic.yml/badge.svg)](https://github.com/rtaserver/RTA-WRT/actions/workflows/generate-rtawrt-amlogic.yml)
-[![Generate RTA-WRT Firmware](https://github.com/rtaserver/RTA-WRT/actions/workflows/generate-rtawrt.yml/badge.svg)](https://github.com/rtaserver/RTA-WRT/actions/workflows/generate-rtawrt.yml)
+# Link Download
+
+* <a href="https://github.com/rtaserver/RTA-WRT/releases/tag/openwrt_xunlong_xunlong_orangepi-r1-plus-lts"><img src="https://img.shields.io/github/downloads/rtaserver/RTA-WRT/openwrt_xunlong_xunlong_orangepi-r1-plus-lts/total?logo=openwrt&label=OpenWrt%20-%20Orange%20Pi%20R1%20Plus%20LTS"></a>
+* <a href="https://github.com/rtaserver/RTA-WRT/releases/tag/openwrt_xunlong_orangepi-r1-plus"><img src="https://img.shields.io/github/downloads/rtaserver/RTA-WRT/openwrt_xunlong_orangepi-r1-plus/total?logo=openwrt&label=OpenWrt%20-%20Orange%20Pi%20R1%20Plus"></a>
+* <a href="https://github.com/rtaserver/RTA-WRT/releases/tag/openwrt_rpi-4"><img src="https://img.shields.io/github/downloads/rtaserver/RTA-WRT/openwrt_rpi-4/total?logo=openwrt&label=OpenWrt%20-%20Raspberry%20Pi%204B"></a>
+* <a href="https://github.com/rtaserver/RTA-WRT/releases/tag/openwrt_rpi-3"><img src="https://img.shields.io/github/downloads/rtaserver/RTA-WRT/openwrt_rpi-3/total?logo=openwrt&label=OpenWrt%20-%20Raspberry%20Pi%203B"></a>
+* <a href="https://github.com/rtaserver/RTA-WRT/releases/tag/openwrt_generic"><img src="https://img.shields.io/github/downloads/rtaserver/RTA-WRT/openwrt_generic/total?logo=openwrt&label=OpenWrt%20-%20x86-64"></a>
+* <a href="https://github.com/rtaserver/RTA-WRT/releases/tag/openwrt_friendlyarm_nanopi-r4s"><img src="https://img.shields.io/github/downloads/rtaserver/RTA-WRT/openwrt_friendlyarm_nanopi-r4s/total?logo=openwrt&label=OpenWrt%20-%20NanoPi%20R4S"></a>
+* <a href="https://github.com/rtaserver/RTA-WRT/releases/tag/openwrt_friendlyarm_nanopi-r2s"><img src="https://img.shields.io/github/downloads/rtaserver/RTA-WRT/openwrt_friendlyarm_nanopi-r2s/total?logo=openwrt&label=OpenWrt%20-%20NanoPi%20R2S"></a>
+* <a href="https://github.com/rtaserver/RTA-WRT/releases/tag/openwrt_friendlyarm_nanopi-r2c"><img src="https://img.shields.io/github/downloads/rtaserver/RTA-WRT/openwrt_friendlyarm_nanopi-r2c/total?logo=openwrt&label=OpenWrt%20-%20NanoPi%20R2C"></a>
+* <a href="https://github.com/rtaserver/RTA-WRT/releases/tag/openwrt_amlogic_s905x-b860h"><img src="https://img.shields.io/github/downloads/rtaserver/RTA-WRT/openwrt_amlogic_s905x-b860h/total?logo=openwrt&label=OpenWrt%20-%20Amlogic%20B860H-V1-V2"></a>
+* <a href="https://github.com/rtaserver/RTA-WRT/releases/tag/openwrt_amlogic_s905x2"><img src="https://img.shields.io/github/downloads/rtaserver/RTA-WRT/openwrt_amlogic_s905x2/total?logo=openwrt&label=OpenWrt%20- Amlogic%20B860H-V5"></a>
+* <a href="https://github.com/rtaserver/RTA-WRT/releases/tag/openwrt_amlogic_s905x"><img src="https://img.shields.io/github/downloads/rtaserver/RTA-WRT/openwrt_amlogic_s905x/total?logo=openwrt&label=OpenWrt%20-%20Amlogic%20HG680P"></a>
+
+---
+
 
 
 * [Apache License 2.0](https://github.com/rtaserver/RTA-WRT/blob/main/LICENSE)
 * [friWrt-MyWrtBuilder](https://github.com/frizkyiman/friWrt-MyWrtBuilder) by [frizkyiman](https://github.com/frizkyiman)
 * [MyWrtBuilder](https://github.com/Revincx/MyWrtBuilder) by [Revincx](https://github.com/Revincx)
-* [RadiusMonitor](https://github.com/Maizil41/RadiusMonitor) by [Maizil41](https://github.com/Maizil41)
 
 Peringatan untuk Instalasi Pertama:
 ---
@@ -46,8 +49,8 @@ Peringatan untuk Instalasi Pertama:
 
 Detail firmware
 ---
- - ```Firmware Akan Auto Update Mingguan```
- - ```Lihat CHANGELOG.md Untuk Melihat Perubahan Selain Update Firmware Mingguan```
+
+ - ```Lihat CHANGELOG.md Untuk Melihat Perubahan```
 
 Termasuk Tunneling
 * Openwrt Terbaru - 23.05.5 : Openclash, Passwall Dan Mihomo
@@ -55,11 +58,6 @@ Termasuk Tunneling
 
 Informasi
 * 192.168.1.1 | pengguna: root | kata sandi: rtawrt
-* MySQL | pengguna: root | kata sandi: radius
-* Radius Monitor | pengguna: root | kata sandi: mutiara
----
-* **TUTORIAL PENGAKTIFAN HOTSPOT VOUCHER ADA DI CHANEL TELEGRAM**
-
 ---
 * SSID: RTA-WRT_2g / RTA-WRT_5g
 * Modemmanager dengan koneksi ulang otomatis,
