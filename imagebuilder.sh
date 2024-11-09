@@ -320,12 +320,12 @@ custom_packages() {
 
     # Download IPK From Custom
     other_packages=(
-        "lolcat|https://downloads.openwrt.org/releases/${op_branch}/packages/$ARCH_3/packages"
-        "modemmanager-rpcd|https://downloads.immortalwrt.org/snapshots/packages/$ARCH_3/packages"
-        "luci-proto-modemmanager|https://downloads.immortalwrt.org/snapshots/packages/$ARCH_3/luci"
-        "libqmi|https://downloads.immortalwrt.org/snapshots/packages/$ARCH_3/packages"
-        "libmbim|https://downloads.immortalwrt.org/snapshots/packages/$ARCH_3/packages"
-        "modemmanager|https://downloads.immortalwrt.org/snapshots/packages/$ARCH_3/packages"
+        "lolcat|https://downloads.openwrt.org/snapshots/packages/$ARCH_3/packages"
+        "modemmanager-rpcd|https://downloads.openwrt.org/snapshots/packages/$ARCH_3/packages"
+        "luci-proto-modemmanager|https://downloads.openwrt.org/snapshots/packages/$ARCH_3/luci"
+        "libqmi|https://downloads.openwrt.org/snapshots/packages/$ARCH_3/packages"
+        "libmbim|https://downloads.openwrt.org/snapshots/packages/$ARCH_3/packages"
+        "modemmanager|https://downloads.openwrt.org/snapshots/packages/$ARCH_3/packages"
         "sms-tool|https://downloads.openwrt.org/releases/${op_branch}/packages/$ARCH_3/packages"
         "luci-app-netspeedtest|https://fantastic-packages.github.io/packages/releases/23.05/packages/x86_64/luci"
         "luci-app-zerotier|https://dl.openwrt.ai/latest/packages/$ARCH_3/kiddin9"
@@ -357,8 +357,8 @@ custom_packages() {
 
     # OpenClash
     openclash_api="https://api.github.com/repos/vernesong/OpenClash/releases"
-    openclash_file="luci-app-openclash"
-    openclash_file_down="$(curl -s ${openclash_api} | grep "browser_download_url" | grep -oE "https.*${openclash_file}.*.ipk" | head -n 1)"
+    openclash_file_ipk="luci-app-openclash"
+    openclash_file_ipk_down="$(curl -s ${openclash_api} | grep "browser_download_url" | grep -oE "https.*${openclash_file_ipk}.*.ipk" | head -n 1)"
 
     echo -e "${STEPS} Start Clash Core Download !"
     core_dir="${custom_files_path}/etc/openclash/core"
@@ -371,37 +371,60 @@ custom_packages() {
 
     # Mihomo
     mihomo_api="https://api.github.com/repos/rtaserver/OpenWrt-mihomo-Mod/releases"
-    mihomo_file="mihomo_${ARCH_3}"
-    mihomo_file_down="$(curl -s ${mihomo_api} | grep "browser_download_url" | grep -oE "https.*${mihomo_file}.*.tar.gz" | head -n 1)"
-                        
+    mihomo_file_ipk="mihomo_${ARCH_3}-openwrt-23.05" #$op_branch | cut -d '.' -f 1-2
+    mihomo_file_ipk_down="$(curl -s ${mihomo_api} | grep "browser_download_url" | grep -oE "https.*${mihomo_file_ipk}.*.tar.gz" | head -n 1)"
+
+    #passwall
+    passwall_api="https://api.github.com/repos/xiaorouji/openwrt-passwall/releases"
+    passwall_file_ipk="luci-23.05_luci-app-passwall"
+    passwall_file_zip="passwall_packages_ipk_${ARCH_3}"
+    passwall_file_ipk_down="$(curl -s ${passwall_api} | grep "browser_download_url" | grep -oE "https.*${passwall_file_ipk}.*.ipk" | head -n 1)"
+    passwall_file_zip_down="$(curl -s ${passwall_api} | grep "browser_download_url" | grep -oE "https.*${passwall_file_zip}.*.zip" | head -n 1)"
+
+
     # Output download information
-    echo -e "${STEPS} Installing OpenClash, core And Mihomo"
+    echo -e "${STEPS} Installing OpenClash, Mihomo And Passwall"
 
     echo -e "${INFO} Downloading OpenClash package"
-    curl -fsSOL ${openclash_file_down}
+    curl -fsSOL ${openclash_file_ipk_down}
     if [ "$?" -ne 0 ]; then
         error_msg "Error: Failed to download OpenClash package."
     fi
-
-    echo -e "${INFO} Downloading clash_meta.gz..."
     curl -fsSL -o "${core_dir}/clash_meta.gz" "${clash_meta}"
     gzip -d $core_dir/clash_meta.gz
-    echo -e "${INFO} clash_meta.gz downloaded successfully."
+    if [ "$?" -ne 0 ]; then
+        error_msg "Error: Failed to extract OpenClash package."
+    fi
+    echo -e "${INFO} OpenClash Packages downloaded successfully."
 
     echo -e "${INFO} Downloading Mihomo package"
-    curl -fsSOL ${mihomo_file_down}
+    curl -fsSOL ${mihomo_file_ipk_down}
     if [ "$?" -ne 0 ]; then
         error_msg "Error: Failed to download Mihomo package."
     fi
-
-    echo -e "${INFO} Extract Mihomo package"
-    tar -xzvf "mihomo_${ARCH_3}.tar.gz" && rm "mihomo_${ARCH_3}.tar.gz"
+    tar -xzvf "mihomo_${ARCH_3}-openwrt-23.05.tar.gz" && rm "mihomo_${ARCH_3}-openwrt-23.05.tar.gz"
     if [ "$?" -ne 0 ]; then
         error_msg "Error: Failed to extract Mihomo package."
     fi
+    echo -e "${INFO} Mihomo Packages downloaded successfully."
 
-    echo -e "${SUCCESS} Download and extraction complete."
+    echo -e "${INFO} Downloading Passwall package"
+    curl -fsSOL ${passwall_file_ipk_down}
+    if [ "$?" -ne 0 ]; then
+        error_msg "Error: Failed to download Passwall package."
+    fi
+    curl -fsSOL ${passwall_file_zip_down}
+    if [ "$?" -ne 0 ]; then
+        error_msg "Error: Failed to download Passwall Zip package."
+    fi
+    unzip -q "passwall_packages_ipk_${ARCH_3}.zip" && rm "passwall_packages_ipk_${ARCH_3}.zip"
+    if [ "$?" -ne 0 ]; then
+        error_msg "Error: Failed to extract Passwall package."
+    fi
+    echo -e "${INFO} Passwall Packages downloaded successfully."
 
+
+    echo -e "${SUCCESS} Download and extraction All complete."
     sync && sleep 3
     echo -e "${INFO} [ packages ] directory status: $(ls -al 2>/dev/null)"
 }
@@ -473,6 +496,7 @@ rebuild_firmware() {
     luci-mod-status luci-mod-system luci-proto-bonding \
     luci-proto-ppp lolcat coreutils-stty git git-http"
 
+    PACKAGES+=" iptables-nft" #NFT 
 
     PACKAGES+=" luci-app-zerotier luci-app-cloudflared tailscale luci-app-tailscale"
 
@@ -482,8 +506,9 @@ rebuild_firmware() {
     # Tunnel option
     OPENCLASH="coreutils-nohup bash dnsmasq-full curl ca-certificates ipset ip-full libcap libcap-bin ruby ruby-yaml kmod-tun kmod-inet-diag unzip kmod-nft-tproxy luci-compat luci luci-base luci-app-openclash"
     MIHOMO+="mihomo luci-app-mihomo"
+    PASSWALL+="chinadns-ng resolveip dns2socks dns2tcp ipt2socks microsocks tcping xray-core xray-plugin luci-app-passwall"
 
-    PACKAGES+=" $OPENCLASH $MIHOMO"
+    PACKAGES+=" $OPENCLASH $MIHOMO $PASSWALL"
 
     # NAS and Hard disk tools
     PACKAGES+=" luci-app-diskman luci-app-hd-idle luci-app-disks-info smartmontools kmod-usb-storage kmod-usb-storage-uas ntfs-3g"
