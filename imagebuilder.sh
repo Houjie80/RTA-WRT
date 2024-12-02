@@ -361,15 +361,15 @@ custom_packages() {
         "modemmanager|https://downloads.$op_sourse.org/releases/packages-24.10/$ARCH_3/packages"
         "sms-tool|https://downloads.$op_sourse.org/releases/packages-24.10/$ARCH_3/packages"
         "tailscale|https://downloads.$op_sourse.org/releases/packages-24.10/$ARCH_3/packages"
-        "python3-speedtest-cli|https://downloads.openwrt.org/releases/packages-$CURVER/$ARCH_3/packages"
+        "python3-speedtest-cli|https://downloads.openwrt.org/releases/packages-23.05/$ARCH_3/packages"
 
-        "luci-app-tailscale|https://dl.openwrt.ai/$CURVER/packages/$ARCH_3/kiddin9"
-        "luci-app-diskman|https://dl.openwrt.ai/$CURVER/packages/$ARCH_3/kiddin9"
-        "modeminfo|https://dl.openwrt.ai/$CURVER/packages/$ARCH_3/kiddin9"
-        "atinout|https://dl.openwrt.ai/$CURVER/packages/$ARCH_3/kiddin9"
-        "luci-app-poweroff|https://dl.openwrt.ai/$CURVER/packages/$ARCH_3/kiddin9"
-        "xmm-modem|https://dl.openwrt.ai/$CURVER/packages/$ARCH_3/kiddin9"
-        "luci-app-lite-watchdog|https://dl.openwrt.ai/$CURVER/packages/$ARCH_3/kiddin9"
+        "luci-app-tailscale|https://dl.openwrt.ai/23.05/packages/$ARCH_3/kiddin9"
+        "luci-app-diskman|https://dl.openwrt.ai/23.05/packages/$ARCH_3/kiddin9"
+        "modeminfo|https://dl.openwrt.ai/23.05/packages/$ARCH_3/kiddin9"
+        "atinout|https://dl.openwrt.ai/23.05/packages/$ARCH_3/kiddin9"
+        "luci-app-poweroff|https://dl.openwrt.ai/23.05/packages/$ARCH_3/kiddin9"
+        "xmm-modem|https://dl.openwrt.ai/23.05/packages/$ARCH_3/kiddin9"
+        "luci-app-lite-watchdog|https://dl.openwrt.ai/23.05/packages/$ARCH_3/kiddin9"
 
         "luci-app-internet-detector|https://github.com/gSpotx2f/packages-openwrt/raw/refs/heads/master/current"
         "internet-detector|https://github.com/gSpotx2f/packages-openwrt/raw/refs/heads/master/current"
@@ -386,7 +386,7 @@ custom_packages() {
         "luci-app-modemband|https://downloads.immortalwrt.org/releases/packages-24.10/$ARCH_3/luci"
         "luci-app-sms-tool-js|https://downloads.immortalwrt.org/releases/packages-24.10/$ARCH_3/luci"
 
-        "luci-app-netspeedtest|https://fantastic-packages.github.io/packages/releases/$CURVER/packages/x86_64/luci"
+        "luci-app-netspeedtest|https://fantastic-packages.github.io/packages/releases/23.05/packages/x86_64/luci"
     )
     download_packages "custom" other_packages[@]
 
