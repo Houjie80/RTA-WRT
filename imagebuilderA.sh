@@ -1,4 +1,4 @@
-se#!/bin/bash
+#!/bin/bash
 #================================================================================================
 # Description: Build OpenWrt with Image Builder
 # Copyright (C) 2021~ https://github.com/unifreq/openwrt_packit
