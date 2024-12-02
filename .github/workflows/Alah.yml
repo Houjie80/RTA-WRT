@@ -230,7 +230,7 @@ jobs:
             mkdir -p ophub_builder/openwrt-armvirt
             cp -f compiled_images_${{ env.TAG_NAME }}/*rootfs.tar.gz ophub_builder/openwrt-armvirt/
             cd ophub_builder
-            sudo ./remake -b ${{ env.openwrt_board }} -k 5.15.y_5.10.y -s 1024
+            sudo ./remake -b ${{ env.openwrt_board }} -k ${{ inputs.openwrt_kernel }} -s ${{ inputs.rootfs_size }}
             for file in openwrt/out/*.img.gz; do cp -f "$file" ../compiled_images_${{ env.TAG_NAME }}; done
           fi
 
