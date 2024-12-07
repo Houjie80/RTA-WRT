@@ -90,7 +90,7 @@ on:
 
 env:
   TZ: Asia/Jakarta
-  IMAGEBUILDER_SH: imagebuilderA.sh
+  IMAGEBUILDER_SH: imagebuilder.sh
 
 jobs:
   prebuild:
