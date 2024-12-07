@@ -1,7 +1,6 @@
 # Put your custom commands here that should be executed once
 # the system init finished. By default this file does nothing.
-
-# Auto mount disk drive on startup
-# change to your drive path and uncomment below
-
+#/etc/init.d/radiusd restart
+#/etc/init.d/chilli restart
+sleep 10 && sync_time.sh quiz.int.vidio.com
 exit 0
