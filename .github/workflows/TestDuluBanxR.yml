@@ -253,9 +253,9 @@ jobs:
                   if [[ -f "$file" ]]; then
                       if [[ "${{ env.TARGET_NAME }}" == "amlogic" ]]; then
                         kernel=$(echo "$file" | grep -oP 'k[0-9.]+')
-                        new_name="Xidz-WRT_${{ env.RELEASES_TAG }}_${replace}_${kernel}.img.gz"
+                        new_name="HOUJIE-WRT_${{ env.RELEASES_TAG }}_${replace}_${kernel}.img.gz"
                       else
-                        new_name="Xidz-WRT_${{ env.RELEASES_TAG }}_${replace}.img.gz"
+                        new_name="HOUJIE-WRT_${{ env.RELEASES_TAG }}_${replace}.img.gz"
                       fi
                       echo -e "${MSG_INFO} Renaming: $file -> $new_name"
                       mv "$file" "compiled_images_${{ env.TAG_NAME }}/$new_name"
@@ -270,7 +270,7 @@ jobs:
         uses: ncipollo/release-action@main
         if: ${{ steps.prepare2.outputs.status }} == 'success' && !cancelled()
         with:
-          tag: XidzWrt_imagebuilder_${{ env.RELEASES_TAG }}
+          tag: HOUJIE-Wrt_imagebuilder_${{ env.RELEASES_TAG }}
           artifacts: imagebuilder/compiled_images_${{ env.TAG_NAME }}/*
           allowUpdates: true
           removeArtifacts: false
@@ -281,8 +281,8 @@ jobs:
             ### OpenWrt Image information
             - Default IP: 192.168.1.1
             - Default username: root
-            - Default password: xidz
-            - Default WIFI name: Xidz | Xidz_5G
-            - Default WIFI password: none
+            - Default password: sijitekowolu
+            - Default WIFI name: NOKIA N73 | NOKIA N73_5G
+            - Default WIFI password: sijitekowolu
             ### Install to EMMC
             - Login to OpenWrt → System → Amlogic Service → Install OpenWrt
