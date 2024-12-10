@@ -6,7 +6,7 @@
 #                https://downloads.immortalwrt.org/releases
 #=====================================================================================
 
-name: Build OpenWrt With ImageBuilder
+name: Build new
 
 on:
   repository_dispatch:
